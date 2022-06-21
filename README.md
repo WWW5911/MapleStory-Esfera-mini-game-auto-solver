@@ -1,5 +1,8 @@
 #### MapleStory Esfera mini-game-auto solver
 
+
+- step0: download the EsferaSolver.exe
+-        下載 EsferaSolver.exe
 - step1: sit in the fort 
 -        坐在砲台上
 - step2: use "win+s" select the whole mini map 
