@@ -156,4 +156,4 @@ if os.path.isfile("result/" + path + ".png"):
 
 plt.tight_layout()
 plt.savefig( "result/" + path + ".png", dpi = 300, transparent = False, format = "png")
-
+plt.show()
