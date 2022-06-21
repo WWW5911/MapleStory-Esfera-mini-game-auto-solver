@@ -7,13 +7,12 @@ import shutil
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from datetime import datetime
-import pyperclip
 from PIL import ImageGrab
 
-tmp_value = pyperclip.paste() 
+thisPath = "./"
 
 def checkkk(strr):
-    path = os.path.split(os.path.realpath(__file__))[0] + "/" + strr
+    path = "./" + strr
     if not os.path.isdir(path):
         os.makedirs(path)
     return path    
@@ -41,7 +40,10 @@ except:
     pass
 
 checkkk("tmp")
-open("tmp\此資料夾會被自動刪除", "w")
+open( thisPath + "/tmp/0this folder will be deleted automaticly", "w")
+
+print(thisPath + "/tmp")
+
 checkkk("result")
 
 playerS = [255, 221, 68]
@@ -49,8 +51,8 @@ targetS = [255, 17, 17]
 
 
 im = ImageGrab.grabclipboard()
-im.save('tmp/0.png','PNG')
-img = Image.open("tmp/0.png")
+im.save(thisPath + '/tmp/0.png','PNG')
+img = Image.open(thisPath + "/tmp/0.png")
 width, height = img.size
 
 player = []
@@ -78,10 +80,10 @@ tmp.append( [np.average(np.array(tmpp).T[0]), np.average(np.array(tmpp).T[1])] )
 
 target = tmp
 
-tmpIm = Image.open("tmp/0.png")
+tmpIm = Image.open(thisPath + "/tmp/0.png")
 for t in target:
     tmpIm.putpixel((int(t[0]), int(t[1])), (255,255,255,99) )    
-tmpIm.save("tmp/1.png")
+tmpIm.save(thisPath + "/tmp/1.png")
 
 
 V0X, V0Y = 1000, 1000
@@ -99,7 +101,7 @@ while angle <= 90:
     flag = False
     place = []
     if debug :
-        imggg = Image.open("tmp/0.png")
+        imggg = Image.open(thisPath + "/tmp/0.png")
     for i in range(1000):
         place.append( [Xcal(V0X, angle, i/1000), Ycal(V0Y, angle, i/1000)] )
         
@@ -120,15 +122,15 @@ while angle <= 90:
                 if (not isEli[point]) and math.dist(bullet, target[point]) < 2:
                     print(angle)
                     ans.append(angle)
-                    if os.path.isfile("tmp/angle= " + str(angle) + ".png"):
+                    if os.path.isfile(thisPath + "/tmp/angle= " + str(angle) + ".png"):
                         tag = 1
-                        while os.path.isfile("tmp/angle= " + str(angle) + "-" + str(tag)+ ".png"):
+                        while os.path.isfile(thisPath + "/tmp/angle= " + str(angle) + "-" + str(tag)+ ".png"):
                             tag += 1
-                        imglist.append("tmp/angle= " + str(angle) + "-" + str(tag) + ".png")
-                        imggg.save("tmp/angle= " + str(angle) + "-" + str(tag) + ".png")
+                        imglist.append(thisPath + "/tmp/angle= " + str(angle) + "-" + str(tag) + ".png")
+                        imggg.save(thisPath + "/tmp/angle= " + str(angle) + "-" + str(tag) + ".png")
                     else:
-                        imglist.append("tmp/angle= " + str(angle) + ".png")
-                        imggg.save("tmp/angle= " + str(angle) + ".png")
+                        imglist.append(thisPath + "/tmp/angle= " + str(angle) + ".png")
+                        imggg.save(thisPath + "/tmp/angle= " + str(angle) + ".png")
                     isEli[point] = True
                     
                     angle -= 1
@@ -155,12 +157,12 @@ for ind in range(len(imglist)):
 now = datetime.now()
 
 path = now.strftime("%Y-%m-%d")
-if os.path.isfile("result/" + path + ".png"):
+if os.path.isfile(thisPath + "/result/" + path + ".png"):
     tag = 1
-    while os.path.isfile("result/" + path + "-" + str(tag) +  ".png"):
+    while os.path.isfile(thisPath + "/result/" + path + "-" + str(tag) +  ".png"):
         tag += 1
     path = path + "-" + str(tag) 
 
 plt.tight_layout()
-plt.savefig( "result/" + path + ".png", dpi = 300, transparent = False, format = "png")
+plt.savefig( thisPath + "/result/" + path + ".png", dpi = 300, transparent = False, format = "png")
 plt.show()
