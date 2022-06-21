@@ -70,13 +70,20 @@ tmp = []
 tmpp = []
 tmpp.append(target[0])
 for i in range(1, len(target)):
-    tmpp.append(target[i])
     if math.dist(target[i-1], target[i]) > 10:
-        tmp.append( [np.average(np.array(tmpp).T[0]), np.average(np.array(tmpp).T[1])] )
+        tmp.append( [np.average(np.array(tmpp).T[0]), np.average(np.array(tmpp).T[1])  ] )
         tmpp = []
+    tmpp.append(target[i])
 tmp.append( [np.average(np.array(tmpp).T[0]), np.average(np.array(tmpp).T[1])] )
 
 target = tmp
+
+tmpIm = Image.open("tmp/0.png")
+for t in target:
+    tmpIm.putpixel((int(t[0]), int(t[1])), (255,255,255,99) )    
+tmpIm.save("tmp/1.png")
+
+
 V0X, V0Y = 1000, 1000
 
 
@@ -135,7 +142,7 @@ while angle <= 90:
 
 
 
-plt.figure(figsize=(6,  (int((len(imglist)-1)/2)+1)*2.5  ))
+plt.figure(figsize=(6,  (int((len(imglist)-1)/2)+1)*2  ))
 for ind in range(len(imglist)):
     plt.subplot(int((len(imglist)-1)/2)+1, 2, ind+1)
     plt.axis('off')
